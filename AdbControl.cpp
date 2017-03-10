@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <windows.h>
 using namespace std;
-int hint()
+void hint()
 {
     cout<<endl<<"P - Power";
     cout<<endl<<"H - Home";
@@ -13,15 +13,9 @@ int hint()
     cout<<endl<<"Enter";
     cout<<endl<<"Num (-) - Hang le";
     cout<<endl<<"Num (+) - Hang fel";
-    cout<<endl<<"";
-    cout<<endl<<"";
-    cout<<endl<<"";
-    cout<<endl<<"";
-    cout<<endl<<"";
-    cout<<endl<<"";
-    cout<<endl<<"";
-    cout<<endl<<"";
-    cout<<endl<<"";
+    cout<<endl<<"T - APK install";
+    cout<<endl<<"Shift + S - shell";
+    cout<<endl;
 
 }
 int main()
@@ -42,15 +36,47 @@ int main()
         system("adb start-server");
         system("cls");
         cout<<"Min keresztül szeretnéd csatlakoztatni az eszközöd?: ";
-        cout<<endl<<"1. Wi-Fi\n2. USB\n10. Direct IP\nVálasz: ";
+        cout<<endl<<"1. Wi-Fi\n2. USB\n3. ADB tcpip 5555 spam\n4. Direct IP\nVálasz: ";
         cin>>option;
         cout<<endl;
-        if(option==10)
+        if(option==4)
         {
             cout<<"IP: ";
             cin>>IP;
             command=a+IP;
             system(command.c_str());
+        }
+        if(option==3)
+        {
+            string TempIP;
+            int keyevent;
+            while(keyevent!=12000)
+            {
+                keyevent=_getch();
+                switch(keyevent)
+                {
+                case 13:
+                    {
+                        system("adb devices");
+                        cout<<"Disconnect device and type it's IP: ";
+                        cin>>TempIP;
+                        string commandLOL;
+                        commandLOL="adb connect "+TempIP;
+                        system(commandLOL.c_str());
+                        keyevent=12000;
+                    }
+                    break;
+
+                case 27: {
+                    system("adb tcpip 5555");
+                    }
+                    break;
+                case 114: {
+                    system("adb devices");
+                    }
+                    break;
+                }
+            }
         }
         if(option==1)
         {
@@ -73,16 +99,16 @@ int main()
         }
     }
     string b="adb shell input text ";
-    int input;
+    int input=10;
     system("cls");
     hint();
     while(input!=0)
     {
+        string TempPATH;
         input=_getch();
-        cout<<input<<endl;
         if(input==105)
         {
-            cout<<endl<<"Szoveg: ";
+            cout<<endl<<"Szöveg: ";
             cin>>text;
             text=b+text;
             system(text.c_str());
@@ -90,6 +116,19 @@ int main()
         if(input==112)
         {
             system("adb shell input keyevent KEYCODE_POWER");
+        }
+        if(input==116)
+        {
+            cout<<endl<<"APK helye: ";
+            cin>>TempPATH;
+            string command2="adb install "+TempPATH;
+            system(command2.c_str());
+            cout<<endl;
+        }
+        if(input==83)
+        {
+            cout<<endl;
+            system("adb shell");
         }
         if(input==104)
         {
