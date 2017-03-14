@@ -1,1 +1,5 @@
 A program which can be used to conrol your adb enabled devices.
+
+Source code: AdbControl.cpp
+
+Architecture: x86
