@@ -1,1 +1,5 @@
 Simple snake game without tail function, and dynamic map size control.
+
+Source code: Snake++.cpp
+
+Architecture: x86
