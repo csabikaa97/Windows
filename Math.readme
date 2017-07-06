@@ -1,0 +1,5 @@
+Simple calculator app made in C++ with win32 API.
+
+Source: Math.cpp
+
+Executable: Math.exe
